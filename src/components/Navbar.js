@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Mail, Notifications, Search } from "@material-ui/icons";
+import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -36,10 +37,17 @@ const useStyles = makeStyles((theme) => ({
     },
     borderRadius: theme.shape.borderRadius,
     width: "50%",
+    [theme.breakpoints.down("sm")]: {
+      display: (props) => props.open ? "flex" : "none",
+    },
+
   },
   input: {
     color: "#fff",
     marginLeft: theme.spacing(1),
+  },
+  searchButton: {
+    marginRight: theme.spacing(2),
   },
   searchIcon: {
     marginRight: theme.spacing(0.5),
@@ -49,14 +57,15 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
   },
-  badge:{
-      marginRight:theme.spacing(2),
-      cursor:"pointer"
-  }
+  badge: {
+    marginRight: theme.spacing(2),
+    cursor: "pointer",
+  },
 }));
 
 const Navbar = () => {
-  const classes = useStyles();
+    const [open,setOpen] = useState(false)
+  const classes = useStyles({open});
   return (
     <AppBar>
       <Toolbar className={classes.toolbar}>
@@ -71,6 +80,7 @@ const Navbar = () => {
           <InputBase placeholder="Search..." className={classes.input} />
         </div>
         <div className={classes.icons}>
+            <Search className={classes.searchButton} oncClick={() => setOpen(true)}/>
           <Badge badgeContent={6} color="secondary" className={classes.badge}>
             <Mail />
           </Badge>
