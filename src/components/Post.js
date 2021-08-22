@@ -11,12 +11,19 @@ import {
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  media:{
-      height:250
+  media: {
+    height: 250,
+    width:"100%",
+    [theme.breakpoints.down("sm")]: {
+      height: 150,
+    },
   },
-  card:{
-      marginBottom:theme.spacing(3)
-  }
+  card: {
+    marginBottom: theme.spacing(3),
+    [theme.breakpoints.down("sm")]: {
+      width: 400,
+    },
+  },
 }));
 
 const Post = () => {
